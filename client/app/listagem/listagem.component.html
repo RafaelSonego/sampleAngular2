@@ -2,7 +2,7 @@
     <h1 class="text-center">Projeto</h1>
 </div>
 <div class="container">
-
+    <p *ngIf="mensagem.length" class="alert alert-info">{{mensagem}}</p>
     <div class="row">
         <div class="col-md-12">
             <form>
@@ -22,9 +22,14 @@
     <br>
 
     <div class="row">
-        <painel *ngFor="let foto of fotos | filtroPorTitulo: textoProcurado.value" titulo="{{foto.titulo | uppercase}}" class="col-md-2">
-            <foto url="{{foto.url}}" titulo="{{foto.titulo}}"></foto>
-            <!--Componente angular foto.component.ts-->
+        <painel *ngFor="let foto of fotos | filtroPorTitulo: textoProcurado.value" 
+                titulo="{{foto.titulo | uppercase}}" 
+                class="col-md-2">
+            <a [routerLink] = "['/cadastro', foto._id]">
+                <foto url="{{foto.url}}" titulo="{{foto.titulo}}"></foto>
+            </a>
+            <br>
+            <botao nome="Remover" estilo="btn-danger btn-block" (action)="remover(foto)" [confirmacao]="true"></botao>
         </painel>
     </div>
 </div>

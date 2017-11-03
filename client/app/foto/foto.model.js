@@ -11,13 +11,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var foto_component_1 = require('./foto.component');
 var foto_pipe_1 = require('./foto.pipe');
+var foto_service_1 = require('./foto.service');
 var FotoModel = (function () {
     function FotoModel() {
     }
     FotoModel = __decorate([
         core_1.NgModule({
             declarations: [foto_component_1.FotoComponent, foto_pipe_1.FiltroPorTitulo],
-            exports: [foto_component_1.FotoComponent, foto_pipe_1.FiltroPorTitulo] // Quem for utilizar o modulo consiguira utilizar este componente
+            exports: [foto_component_1.FotoComponent, foto_pipe_1.FiltroPorTitulo],
+            providers: [foto_service_1.FotoService]
         }), 
         __metadata('design:paramtypes', [])
     ], FotoModel);

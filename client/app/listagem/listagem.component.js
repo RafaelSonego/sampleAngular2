@@ -9,27 +9,51 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var http_1 = require('@angular/http');
+var foto_service_1 = require('../foto/foto.service');
 var ListagemComponent = (function () {
     //Faz a chamada Ajax para o servidor, Precisa importar o Modulo HTTP que esta no modulo principal do 
-    //projeto e por ser tipado, ele ja irá entender que nao o angular precisa montar o HTTP para nós
-    function ListagemComponent(http) {
-        var _this = this;
+    //projeto e por ser tipado, ele ja irá entender que o angular precisa montar o HTTP para nós (injetar)
+    function ListagemComponent(fotoService) {
         this.fotos = [];
-        var stream = http.get('v1/fotos');
-        // como parametro, recebe uma funcao com a response
-        stream.subscribe(function (res) {
-            _this.fotos = res.json(); // Ja temos o array como que veio do servidor
-            console.log(_this.fotos);
-        });
+        this.mensagem = '';
+        this.fotoService = fotoService;
+        this.listarFotos();
     }
+    ListagemComponent.prototype.listarFotos = function () {
+        var _this = this;
+        this.fotoService
+            .listar()
+            .subscribe(function (fotos) {
+            _this.fotos = fotos;
+            console.log(_this.fotos);
+        }, function (erro) { return console.log(erro); });
+    };
+    ListagemComponent.prototype.remover = function (foto) {
+        var _this = this;
+        this.fotoService
+            .remove(foto)
+            .subscribe(function () {
+            /*
+            //Outra Maneira sem precisar chamar o serviço novamente (eu acho escroto mas por performance ok)
+            let novasFotos = this.fotos.splice(0);
+            let indice = novasFotos.indexOf(foto);
+            novasFotos.splice(indice, 1);
+            this.fotos = novasFotos;
+            */
+            _this.mensagem = 'Foto removida com sucesso!';
+            _this.listarFotos();
+        }, function (erro) {
+            console.log(erro);
+            _this.mensagem = 'Falha ao remover a foto!';
+        });
+    };
     ListagemComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'listagem',
             templateUrl: './listagem.component.html'
         }), 
-        __metadata('design:paramtypes', [http_1.Http])
+        __metadata('design:paramtypes', [foto_service_1.FotoService])
     ], ListagemComponent);
     return ListagemComponent;
 }());

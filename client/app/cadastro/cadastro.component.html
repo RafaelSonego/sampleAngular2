@@ -1,1 +1,63 @@
-<h1 class="text-center"> Cadastro de Fotos</h1>
+<div class="container">
+    <h1 class="text-center">{{foto.titulo}}</h1>
+    <br>
+
+    <p *ngIf="mensagem.length" class="alert alert-info">{{mensagem}}</p>
+
+    <form class="row" [formGroup]="meuForm" (submit)="cadastrar($event)">
+        <div class="col-md-6">
+            
+            <div class="form-group">
+                <label>Título</label>
+                <input 
+                    formControlName="titulo"
+                    name="titulo" 
+                    [(ngModel)]="foto.titulo"  
+                    class="form-control" 
+                    autocomplete="off">
+                <div *ngIf="meuForm.controls.titulo.invalid">
+                    <span *ngIf="meuForm.controls.titulo.errors.required" class="form-control alert-danger">
+                        Titulo Obrigatório
+                    </span>
+                    <span *ngIf="meuForm.controls.titulo.errors.minlength" class="form-control alert-danger">
+                        Titulo deve ter no mínimo 4 caracteres
+                    </span>                    
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>URL</label>
+                <input 
+                    formControlName="url"
+                    name="url" 
+                    [(ngModel)]="foto.url" 
+                    class="form-control" 
+                    autocomplete="off">
+                <span *ngIf="meuForm.controls.url.invalid" class="form-control alert-danger">
+                    Url obrigatória
+                </span>
+            </div>
+            
+            <div class="form-group">
+                <label>Descrição</label>
+                <textarea 
+                    formControlName="descricao"    
+                    name="descricao" 
+                    [(ngModel)]="foto.descricao" 
+                    class="form-control" 
+                    autocomplete="off">
+                </textarea>
+            </div>
+
+            <botao nome="Salvar" tipo="submit" estilo="btn-primary" [desabilitado]="meuForm.invalid"></botao>
+
+            <a [routerLink]="['']" class="btn btn-primary">Voltar</a>
+            <hr>
+        </div>
+
+        <div class="col-md-6">
+            <foto url="{{foto.url}}" titulo="{{foto.titulo}}"></foto>
+        </div>
+
+    </form>
+</div>

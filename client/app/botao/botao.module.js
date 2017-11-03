@@ -9,27 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var FotoComponent = (function () {
-    function FotoComponent() {
+var botao_component_1 = require('./botao.component');
+var BotaoModule = (function () {
+    function BotaoModule() {
     }
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], FotoComponent.prototype, "titulo", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], FotoComponent.prototype, "url", void 0);
-    FotoComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'foto',
-            templateUrl: './foto.component.html',
-            styleUrls: ['./foto.component.css']
+    BotaoModule = __decorate([
+        core_1.NgModule({
+            declarations: [botao_component_1.BotaoComponent],
+            exports: [botao_component_1.BotaoComponent]
         }), 
         __metadata('design:paramtypes', [])
-    ], FotoComponent);
-    return FotoComponent;
+    ], BotaoModule);
+    return BotaoModule;
 }());
-exports.FotoComponent = FotoComponent;
-//# sourceMappingURL=foto.component.js.map
+exports.BotaoModule = BotaoModule;
+//# sourceMappingURL=botao.module.js.map

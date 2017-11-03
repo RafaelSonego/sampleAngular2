@@ -1,2 +1,8 @@
 <!-- Precisa dessa diretiva do angular para que ele entenda onde precisa colocar o conteudo dos componentes das rotas-->
+<nav class="navbar navbar-default">
+    <ul class="nav navbar-nav">
+        <li><a [routerLink]="['/cadastro']">Nova</a></li>
+        <li><a [routerLink]="['']">Home</a></li>
+    </ul>
+</nav>
 <router-outlet></router-outlet>
