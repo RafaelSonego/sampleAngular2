@@ -19,7 +19,7 @@ var BotaoComponent = (function () {
         this.confirmacao = false;
     }
     BotaoComponent.prototype.executarAcao = function () {
-        if (this.confirmacao == true) {
+        if (this.confirmacao) {
             if (confirm('Tem certeza?')) {
                 this.action.emit(null);
             }
